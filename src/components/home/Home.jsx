@@ -2,8 +2,7 @@ import Heading from "../layout/Heading";
 import { BASE_URL } from "../../constants/api";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import { Card, Button } from "react-bootstrap";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -38,35 +37,25 @@ export default function Home() {
   }
 
   return (
-    <>
+    <div className="container mt-5">
       <Heading title="Home" />
-
-      {posts.map(function (post) {
-        return (
-          <div
-            key={post.id}
-            style={{
-              margin: `20px`,
-              display: `flex`,
-              flexDirection: `row`,
-              justifyContent: `center`,
-            }}
-          >
-            <Card style={{ width: "22rem" }}>
+      <div className="row">
+        {posts.map((post) => (
+          <div key={post.id} className="col-md-4 mb-4">
+            <Card style={{ width: "100%" }}>
               <Card.Body>
                 <Card.Title>{post.title.rendered}</Card.Title>
                 <Card.Text
                   dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
                 />
-
                 <Link to={`/detail/${post.id}`}>
                   <Button variant="primary">Read more</Button>
                 </Link>
               </Card.Body>
             </Card>
           </div>
-        );
-      })}
-    </>
+        ))}
+      </div>
+    </div>
   );
 }

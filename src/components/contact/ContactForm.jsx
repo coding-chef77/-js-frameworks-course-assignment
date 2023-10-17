@@ -33,6 +33,7 @@ export default function ContactForm() {
   });
 
   console.log(errors);
+
   return (
     <div className="mt-5">
       <Form
